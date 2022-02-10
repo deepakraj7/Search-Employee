@@ -1,0 +1,43 @@
+package fss.company;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
+public class Searchemployee {
+	public static void main(String[] args)  {
+		
+		try { BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			String emp_name,emp_desig,emp_address,emp_email;
+			int emp_id=0,phone_number=0;
+			float salary=0;
+			
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/searchemployee","root","@Deepakfss7");
+			System.out.println("Connection Established");
+			System.out.println("Enter Employee ID:");
+			emp_id = Integer.parseInt(br.readLine());
+			PreparedStatement stmt = con.prepareStatement("select *from searchemployee where emp_id = "+emp_id);
+					ResultSet rs = stmt.executeQuery();
+					
+				
+				
+				
+				
+		 while(rs.next())
+		System.out.printf(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getInt(5));
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+}
+		
+		
+		
